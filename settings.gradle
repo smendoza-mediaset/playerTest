@@ -1,0 +1,19 @@
+include ':app'
+rootProject.name = "PlayerTestApp"
+
+
+//include ':sdk'
+//project(':sdk').projectDir = new File('/Users/sergiomendoza/Projects/euw1-mes-dm-androidplayer/sdk')
+////project(':sdk').projectDir = new File('C:/Users/joshu/Documents/euw1-mes-dm-androidplayer/sdk')
+//include ':core'
+//project(':core').projectDir = new File('/Users/sergiomendoza/Projects/euw1-mes-dm-androidplayer/core')
+////project(':core').projectDir = new File('C:/Users/joshu/Documents/euw1-mes-dm-androidplayer/core')
+//include ':data'
+//project(':data').projectDir = new File('/Users/sergiomendoza/Projects/euw1-mes-dm-androidplayer/data')
+////project(':data').projectDir = new File('C:/Users/joshu/Documents/euw1-mes-dm-androidplayer/data')
+//include ':domain'
+//project(':domain').projectDir = new File('/Users/sergiomendoza/Projects/euw1-mes-dm-androidplayer/domain')
+////project(':domain').projectDir = new File('C:/Users/joshu/Documents/euw1-mes-dm-androidplayer/domain')
+//include ':di'
+//project(':di').projectDir = new File('/Users/sergiomendoza/Projects/euw1-mes-dm-androidplayer/di')
+////project(':di').projectDir = new File('C:/Users/joshu/Documents/euw1-mes-dm-androidplayer/di')
