@@ -51,7 +51,7 @@ dependencies {
 
     implementation 'org.jetbrains.anko:anko:0.10.5'
 
-    implementation files('libs/MEDIASET_ANDROID_PLAYER_SDK_0.6-pre.aar')
+    implementation files('libs/mediaset-player-sdk-android_0.7.1-pre.aar')
     //implementation project(path:':sdk')
 
     //EXOPLAYER
