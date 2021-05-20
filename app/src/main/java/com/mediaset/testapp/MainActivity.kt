@@ -12,6 +12,7 @@ import com.google.android.exoplayer2.ui.PlayerView
 import com.mediaset.player_sdk_android.VideoPlayerSdk
 import com.mediaset.player_sdk_android.entities.*
 import com.mediaset.player_sdk_android.sdk_delegate.PlayerSdkListener
+import com.mediaset.testapp.dummydata.playerLiveConfig
 import com.mediaset.testapp.dummydata.playerVodConfig
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -20,7 +21,7 @@ class MainActivity : AppCompatActivity(), PlayerSdkListener {
 
     private var playerSdk: VideoPlayerSdk? = null
 
-    private var config = playerVodConfig
+    private var config = playerLiveConfig//playerVodConfig
 
     private var showingControls = false
 
