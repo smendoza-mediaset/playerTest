@@ -97,9 +97,7 @@ fun getConfig(activity: Activity): PlayerConfig {
             ),
             comscoreConfig = AnalyticsConfigInfo.ComscoreConfig(
                 AnalyticsConfigInfo.ServiceConfigurationComscore(
-                    isActive = true,
-                    c2 = "13184057",
-                    appName = "NIUSDIARIO"
+                    isActive = true
                 ),
                 consents = true
             )
