@@ -8,20 +8,22 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
+import com.bluekai.sdk.listeners.DataPostedListener
 import com.google.android.exoplayer2.ui.PlayerView
 import com.mediaset.player_sdk_android.VideoPlayerSdk
 import com.mediaset.player_sdk_android.entities.*
 import com.mediaset.player_sdk_android.sdk_delegate.PlayerSdkListener
+import com.mediaset.testapp.dummydata.getConfig
 import com.mediaset.testapp.dummydata.playerLiveConfig
 import com.mediaset.testapp.dummydata.playerVodConfig
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity(), PlayerSdkListener {
+class MainActivity : AppCompatActivity(), PlayerSdkListener, DataPostedListener {
 
     private var playerSdk: VideoPlayerSdk? = null
 
-    private var config = playerLiveConfig//playerVodConfig
+    private var config = getConfig(this)//playerLiveConfig//playerVodConfig
 
     private var showingControls = false
 
@@ -208,5 +210,8 @@ class MainActivity : AppCompatActivity(), PlayerSdkListener {
         Log.d("Controllers", if(isShow) "Displayed" else "Hidden")
     }
 
+    override fun onDataPosted(p0: Boolean, p1: String?) {
+        Log.d("MainActivity", "$p1")
+    }
 
 }
