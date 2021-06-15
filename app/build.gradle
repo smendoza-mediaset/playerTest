@@ -51,11 +51,11 @@ dependencies {
 
     implementation 'org.jetbrains.anko:anko:0.10.5'
 
-    implementation files('libs/mediaset-player-sdk-android_0.8-pre.aar')
+    implementation files('libs/mediaset-player-sdk-android_0.10-pre.aar')
     //implementation project(path:':sdk')
 
     //EXOPLAYER
-    implementation 'com.google.android.exoplayer:exoplayer:2.12.3'
+    implementation 'com.google.android.exoplayer:exoplayer:2.9.6'
     //Retrofit
     def retrofit_version = '2.9.0'
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"

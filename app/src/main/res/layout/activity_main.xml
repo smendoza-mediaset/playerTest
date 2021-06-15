@@ -9,9 +9,10 @@
 
     <Button
         android:id="@+id/loadplayer"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Load Player"
+        android:layout_margin="8dp"
         tools:layout_editor_absoluteX="156dp"
         tools:layout_editor_absoluteY="390dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -20,12 +21,25 @@
 
     <Button
         android:id="@+id/showhideControls"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Show Controls"
+        android:layout_margin="8dp"
         tools:layout_editor_absoluteX="156dp"
         tools:layout_editor_absoluteY="390dp"
         app:layout_constraintLeft_toRightOf="@id/loadplayer"
+        app:layout_constraintRight_toLeftOf="@id/forceClose"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <Button
+        android:id="@+id/forceClose"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Close Player"
+        android:layout_margin="8dp"
+        tools:layout_editor_absoluteX="156dp"
+        tools:layout_editor_absoluteY="390dp"
+        app:layout_constraintLeft_toRightOf="@id/showhideControls"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -40,7 +54,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-
     <TextView
         android:id="@+id/info_label"
         android:layout_width="match_parent"
@@ -53,6 +66,21 @@
         android:gravity="center"
         android:textColor="#FF0000"
         android:alpha="0.4"/>
+
+    <com.mediaset.player_sdk_android.ui.shared_components.MediasetPlayerSeekBar
+        android:id="@+id/seek_bar"
+        android:visibility="gone"
+
+        app:currentTimeLabelTextSize="16sp"
+        app:remainingTimeLabelTextSize="16sp"
+        app:seekProgressDrawable="@drawable/seek_progress"
+        app:seekThumbDrawable="@drawable/seek_thumb"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 

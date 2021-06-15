@@ -7,10 +7,8 @@ import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import com.bluekai.sdk.BlueKai
 import com.bluekai.sdk.listeners.DataPostedListener
-import com.mediaset.player_sdk_android.entities.AnalyticsConfigInfo
-import com.mediaset.player_sdk_android.entities.PlaybackConfigInfo
-import com.mediaset.player_sdk_android.entities.PlaybackType
-import com.mediaset.player_sdk_android.entities.PlayerConfig
+import com.mediaset.player_sdk_android.entities.*
+import com.mediaset.player_sdk_android.ui.shared_components.MediasetPlayerSeekBar
 import com.mediaset.testapp.BuildConfig
 import com.mediaset.testapp.MainActivity
 import com.mediaset.testapp.MainApp
@@ -18,58 +16,15 @@ import com.mediaset.testapp.R
 import org.jetbrains.anko.image
 import org.json.JSONObject
 
-val playerVodConfig = PlayerConfig(
-    null, // objeto de gigya
-    null, // PlayerConfig.AdsConfigInfo
-//            PlayerConfig.AdsConfigInfo(
-//                isActive,
-//                showAds,
-//                consents // didomi,
-//                // descriptionUrl: kotlin.String
-//            ), // de atenea -> dpf
-    null, // de atena -> omniture, bluekai, comscore
-    null, // null
-    null, // null
-    PlaybackConfigInfo(
-        PlaybackType.VOD,
-        PlaybackConfigInfo.UIConfig(
-            listOf(), // TODO topButtons: List<PlaybackConfigInfo.UIConfig.TopButtonsInfo>,
-            ConfigUtils.getPlaybackButtons(false),
-            false
-        ),
-        PlaybackConfigInfo.Environment.DEBUG, // TODO
-        PlaybackConfigInfo.UrlContent(
-            "", // no necesario
-            "es.mediaset.nius",
-            "app.nius.android.es", //[android | ios]
-            "baseUrl" // -> pre: https://www.niusdiario.pre, pro: https://www.niusdiario.es
-        ),
-        PlaybackConfigInfo.MediasetVideo(
-            "https://malaactitud.pre.3d99a4cb092e6d20ff56d80b9efd9a8f8802ec81.es:8605/1.0.0/get?oid=bitban_api&eid=%2Fapi%2Fcms%2Fniusdiario%2Fvideos%2FMDSVOD20210428_0004%2Fconfig%2Ffinal.json%3Fplatform%3Dapp-native",
-            "dataEpisodeName", // "title" de primer nivel del json
-            false, // no necesario
-            null, // no necesario
-            null, // no necesario
-            null, // no necesario
-            false // no necesario
-        ),
-        PlaybackConfigInfo.ServicesConfig(
-            PlaybackConfigInfo.ServicesConfig.SessionCheckConfig(
-                false, // no necesario
-                "", // no necesario
-                0 // no necesario
-            ),
-            PlaybackConfigInfo.ServicesConfig.NextEpisodeConfig(
-                false, // no necesario
-                0 // no necesario
-            )
-        )
-    )
-)
-
-fun getConfig(activity: Activity): PlayerConfig {
+fun getLiveConfig(activity: Activity): PlayerConfig {
     return PlayerConfig(
-        null, // objeto de gigya
+        UserConfigInfo(
+            userId = "c7e3ccf033cc4c13b32a846b3cdb5a0d",
+            signatureTimeStamp = "1623333274",
+            uidSignature = "I+6CECBhQQGQmE2L227KjLjUFL0=",
+            isPlusUser = true,
+            userSessionId = ""
+        ), // objeto de gigya
         null, // PlayerConfig.AdsConfigInfo
 //            PlayerConfig.AdsConfigInfo(
 //                isActive,
@@ -77,7 +32,7 @@ fun getConfig(activity: Activity): PlayerConfig {
 //                consents // didomi,
 //                // descriptionUrl: kotlin.String
 //            ), // de atenea -> dpf
-        AnalyticsConfigInfo(   //Only sending Bluekai because we have to build new session to test
+        AnalyticsConfigInfo(
             AnalyticsConfigInfo.BluekaiConfig(
                 AnalyticsConfigInfo.ServiceConfigurationBluekai(
                     isActive = true,
@@ -105,6 +60,81 @@ fun getConfig(activity: Activity): PlayerConfig {
         null, // null
         null, // null
         PlaybackConfigInfo(
+            PlaybackType.LIVE,
+            PlaybackConfigInfo.UIConfig(
+                listOf(), // TODO topButtons: List<PlaybackConfigInfo.UIConfig.TopButtonsInfo>,
+                ConfigUtils.getPlaybackButtons(false),
+                false
+            ),
+            PlaybackConfigInfo.Environment.DEBUG, // TODO
+            PlaybackConfigInfo.UrlContent(
+                "", // no necesario
+                "es.mediaset.nius",
+                "app.nius.android.es", //[android | ios]
+                "baseUrl" // -> pre: https://www.niusdiario.pre, pro: https://www.niusdiario.es
+            ),
+            PlaybackConfigInfo.MediasetVideo(
+                "https://malaactitud.pre.3d99a4cb092e6d20ff56d80b9efd9a8f8802ec81.es:8605/1.0.0/get?oid=bitban_api&eid=%2Fapi%2Fcms%2Fniusdiario%2Fvideos%2FMDSVST20200310_0003%2Fconfig%2Ffinal.json%3Fplatform%3Dapp-native",
+                "dataEpisodeName", // "title" de primer nivel del json
+                false, // no necesario
+                null, // no necesario
+                null, // no necesario
+                null, // no necesario
+                false // no necesario
+            ),
+            PlaybackConfigInfo.ServicesConfig(
+                PlaybackConfigInfo.ServicesConfig.SessionCheckConfig(
+                    false, // no necesario
+                    "", // no necesario
+                    0 // no necesario
+                ),
+                PlaybackConfigInfo.ServicesConfig.NextEpisodeConfig(
+                    false, // no necesario
+                    0 // no necesario
+                )
+            )
+        )
+    )
+}
+
+fun getConfig(activity: Activity): PlayerConfig {
+    return PlayerConfig(
+        null, // objeto de gigya
+        null, // PlayerConfig.AdsConfigInfo
+//            PlayerConfig.AdsConfigInfo(
+//                isActive,
+//                showAds,
+//                consents // didomi,
+//                // descriptionUrl: kotlin.String
+//            ), // de atenea -> dpf
+        AnalyticsConfigInfo(
+            AnalyticsConfigInfo.BluekaiConfig(
+                AnalyticsConfigInfo.ServiceConfigurationBluekai(
+                    isActive = true,
+                    bluekaiID = "36882",
+                    termConditions = ""
+                ),
+                objectSession = getBluekaiSession(activity),
+                consents = true,
+                bluekaiMaps = getBluekaiMaps(),
+                userData = AnalyticsConfigInfo.UserDataBluekai(
+                    age = "",
+                    allowMailing = "0",
+                    allowNewsletter = "0",
+                    gender = ""
+                ),
+                sessionStartingTime = 1622044756
+            ),
+            comscoreConfig = AnalyticsConfigInfo.ComscoreConfig(
+                AnalyticsConfigInfo.ServiceConfigurationComscore(
+                    isActive = true
+                ),
+                consents = true
+            )
+        ), // de atenea -> omniture, bluekai, comscore
+        null, // null
+        null, // null
+        PlaybackConfigInfo(
             PlaybackType.VOD,
             PlaybackConfigInfo.UIConfig(
                 listOf(), // TODO topButtons: List<PlaybackConfigInfo.UIConfig.TopButtonsInfo>,
@@ -119,7 +149,7 @@ fun getConfig(activity: Activity): PlayerConfig {
                 "baseUrl" // -> pre: https://www.niusdiario.pre, pro: https://www.niusdiario.es
             ),
             PlaybackConfigInfo.MediasetVideo(
-                "https://malaactitud.pre.3d99a4cb092e6d20ff56d80b9efd9a8f8802ec81.es:8605/1.0.0/get?oid=bitban_api&eid=%2Fapi%2Fcms%2Fniusdiario%2Fvideos%2FMDSVOD20210428_0004%2Fconfig%2Ffinal.json%3Fplatform%3Dapp-native",
+                "https://malaactitud.pre.3d99a4cb092e6d20ff56d80b9efd9a8f8802ec81.es:8605/1.0.0/get?oid=bitban_api&eid=%2Fapi%2Fcms%2Fniusdiario%2Fvideos%2FMDSVOD20210511_0006%2Fconfig%2Ffinal.json%3Fplatform%3Dapp-native",//"https://malaactitud.pre.3d99a4cb092e6d20ff56d80b9efd9a8f8802ec81.es:8605/1.0.0/get?oid=bitban_api&eid=%2Fapi%2Fcms%2Fniusdiario%2Fvideos%2FMDSVOD20210428_0004%2Fconfig%2Ffinal.json%3Fplatform%3Dapp-native",
                 "dataEpisodeName", // "title" de primer nivel del json
                 false, // no necesario
                 null, // no necesario

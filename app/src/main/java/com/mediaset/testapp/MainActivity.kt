@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.bluekai.sdk.listeners.DataPostedListener
@@ -13,19 +14,18 @@ import com.google.android.exoplayer2.ui.PlayerView
 import com.mediaset.player_sdk_android.VideoPlayerSdk
 import com.mediaset.player_sdk_android.entities.*
 import com.mediaset.player_sdk_android.sdk_delegate.PlayerSdkListener
-import com.mediaset.testapp.dummydata.getConfig
-import com.mediaset.testapp.dummydata.playerLiveConfig
-import com.mediaset.testapp.dummydata.playerVodConfig
+import com.mediaset.testapp.dummydata.*
 import kotlinx.android.synthetic.main.activity_main.*
-
 
 class MainActivity : AppCompatActivity(), PlayerSdkListener, DataPostedListener {
 
     private var playerSdk: VideoPlayerSdk? = null
 
-    private var config = getConfig(this)//playerLiveConfig//playerVodConfig
+    private var config = getConfig(this)
 
     private var showingControls = false
+
+
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
@@ -54,7 +54,8 @@ class MainActivity : AppCompatActivity(), PlayerSdkListener, DataPostedListener 
 
         loadplayer.setOnClickListener {
 
-            playerSdk?.initVideoPlayerSDK(config)
+            seek_bar.visibility = View.GONE
+            playerSdk?.initVideoPlayerSDK(config,seek_bar)
         }
 
         if(showingControls) showhideControls.text = "Hide controls" else "Show controls"
@@ -65,7 +66,15 @@ class MainActivity : AppCompatActivity(), PlayerSdkListener, DataPostedListener 
             playerSdk?.forceShowHideCustomControls(showingControls)
         }
 
+        forceClose.setOnClickListener {
+
+            playerSdk?.forceClosePlayer()
+        }
+
+
+
     }
+
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
 
@@ -150,11 +159,13 @@ class MainActivity : AppCompatActivity(), PlayerSdkListener, DataPostedListener 
     }
 
     override fun onAdsInit() {
-        //info_label.text = "Ads initialized"
+
+        info_label.text = "Ads initialized"
     }
 
     override fun onAdsEnd() {
-        //info_label.text = "Ads finished"
+
+        info_label.text = "Ads Finished"
     }
 
     override fun onCerberoTokenUpdate(token: String) {
@@ -171,10 +182,12 @@ class MainActivity : AppCompatActivity(), PlayerSdkListener, DataPostedListener 
 
     override fun onBackwardSeek() {
 
+        Log.d("MainActivity", "Seek Back")
     }
 
     override fun onForwardSeek() {
 
+        Log.d("MainActivity", "Seek Forward")
     }
 
     override fun onPIPInit() {
@@ -206,6 +219,7 @@ class MainActivity : AppCompatActivity(), PlayerSdkListener, DataPostedListener 
 
     override fun onVideoControllersVisibilityChange(isShow: Boolean) {
 
+        seek_bar.visibility = if(isShow) View.VISIBLE else View.GONE
         showhideControls.text = if (isShow) "Hide controls" else "Show controls"
         Log.d("Controllers", if(isShow) "Displayed" else "Hidden")
     }
@@ -213,5 +227,6 @@ class MainActivity : AppCompatActivity(), PlayerSdkListener, DataPostedListener 
     override fun onDataPosted(p0: Boolean, p1: String?) {
         Log.d("MainActivity", "$p1")
     }
+
 
 }
